@@ -13,12 +13,14 @@ struct carta {
     int pontosTuristicos;        // 10              // número de pontos turísticos    
     float pibPerCapita;          // 12345.67        // é o PIB dividido pela população
     float densidadePopulacional; // 123.45          // é a população dividida pela área
+    float superPoder;            // valor calculado para o super poder da carta    
+     
 };
 
 int main() {
     struct carta cartas[2];
     char buffer[100];
-
+    
     for (int i = 0; i < 2; i++) {
         printf("\n=== Carta %d ===\n\n", i + 1);
 
@@ -52,6 +54,8 @@ int main() {
 
         cartas[i].pibPerCapita = (float)(cartas[i].pib / cartas[i].populacao);
         cartas[i].densidadePopulacional = (float)(cartas[i].populacao / cartas[i].area);
+        cartas[i].superPoder = cartas[i].pibPerCapita + cartas[i].densidadePopulacional + cartas[i].pontosTuristicos + cartas[i].area + cartas[i].populacao + cartas[i].pib;
+        
     }
 
     
@@ -70,6 +74,14 @@ int main() {
         printf("Número de Pontos Turísticos: %d\n", cartas[i].pontosTuristicos);
         printf("PIB per Capita: %.2f\n", cartas[i].pibPerCapita);
         printf("Densidade Populacional: %.2f\n", cartas[i].densidadePopulacional);
+
+        if (cartas[0].superPoder > cartas[1].superPoder) {
+            printf("\nA carta com maior super poder é a Carta 1: %s\n", cartas[0].nomeCidade);
+        } else if (cartas[1].superPoder > cartas[0].superPoder) {
+            printf("\nA carta com maior super poder é a Carta 2: %s\n", cartas[1].nomeCidade);
+        } else {
+            printf("\nAs duas cartas têm o mesmo super poder.\n");
+        }   
     }
 
     return 0;
